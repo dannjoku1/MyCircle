@@ -5,6 +5,17 @@ export default`
     message: String!
   }
 
+  type User { 
+    _id: ID!
+    userName: String
+    email: String!
+    firstName: String
+    lastName: String
+    avatar: String
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
   type Chord { 
     _id: ID
     text: String!
@@ -21,6 +32,8 @@ export default`
     createChord(text: String!): Chord
     updateChord(_id: ID!, text: String): Chord
     deleteChord(_id: ID!): Status
+    signup(email: String!, fullName: String!, password: String!, avatar: String, userName: String): User
+    login(email: String!, password: String!): User
   }
 
   schema {
