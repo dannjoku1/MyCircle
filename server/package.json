@@ -16,6 +16,7 @@
     "express": "^4.16.3",
     "faker": "^4.1.0",
     "graphql": "^0.13.2",
+    "graphql-date": "^1.0.3",
     "graphql-tools": "^3.0.4",
     "mongoose": "^5.1.6"
   },
