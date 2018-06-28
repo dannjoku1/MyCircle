@@ -7,7 +7,8 @@ export default {
   Date: GraphQLDate,
   Query: {
     getChord: ChordResolvers.getChord,
-    getChords: ChordResolvers.getChords
+    getChords: ChordResolvers.getChords,
+    me: UserResolvers.me,
   }, 
   Mutation: {
     createChord: ChordResolvers.createChord,
@@ -15,6 +16,5 @@ export default {
     deleteChord: ChordResolvers.deleteChord,
     signup: UserResolvers.signup,
     login: UserResolvers.login, 
-
   }
 }

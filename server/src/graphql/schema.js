@@ -20,6 +20,17 @@ export default`
     updatedAt: Date!
   }
 
+  type Me {
+    _id: ID!
+    userName: String
+    email: String!
+    firstName: String
+    lastName: String
+    avatar: String
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
   type Chord { 
     _id: ID
     text: String!
@@ -30,6 +41,7 @@ export default`
   type Query { 
     getChord(_id: ID!): Chord
     getChords: [Chord] 
+    me: Me
   }
 
   type Mutation {
