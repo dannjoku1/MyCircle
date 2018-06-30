@@ -11,7 +11,6 @@ export default { // function that returns users data
       throw error;
     }
   }, 
-
   getChords: async (_, args, { user }) => { 
     try {
       await requireAuth(user)
@@ -20,11 +19,18 @@ export default { // function that returns users data
       throw error;
     }
   },
-
+  getUserChords: async (_, args, { user }) => { 
+    try {
+      await requireAuth(user)
+      return Chord.find({ user: user._id }).sort({ createdAt: -1 }) // finds everything coming in from the connection Chord
+    } catch (error) {
+      throw error;
+    }
+  },
   createChord: async (_, args, { user }) => {
     try {
       await requireAuth(user)
-      return Chord.create(args)
+      return Chord.create({ ...args, user: user._id}) // if ... spread not included, we will have an arguement inside an arguement
     } catch (error) {
       throw error; 
     }
@@ -34,6 +40,17 @@ export default { // function that returns users data
   updateChord: async (_, { _id, ...rest }, { user }) => {
     try {
       await requireAuth(user)
+      const chord = await Chord.findOne({ _id, user: user._id });
+
+      if (!chord) {
+        throw new Error('Not found!');
+      }
+
+      Object.entries(rest).forEach(([key, value]) => {
+        chord[key] = value;
+      });
+
+      return chord.save()
       return Chord.findByIdAndUpdate(_id, rest, { new: true })
     } catch (error) {
       throw error;
@@ -42,7 +59,12 @@ export default { // function that returns users data
   deleteChord: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user)
-      await Chord.findByIdAndRemove(_id);
+      const chord = await Chord.findOne({ _id, user: user._id });
+   
+      if (!chord) {
+        throw new Error('Not found!');
+      }
+      await chord.remove();
       return {
         message: 'Delete Success!'
       }

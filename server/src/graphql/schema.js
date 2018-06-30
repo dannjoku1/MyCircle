@@ -34,6 +34,8 @@ export default`
   type Chord { 
     _id: ID
     text: String!
+    user: User!
+    favoriteCount: Int!
     createdAt: Date!
     updatedAt: Date!
   }
@@ -41,6 +43,7 @@ export default`
   type Query { 
     getChord(_id: ID!): Chord
     getChords: [Chord] 
+    getUserChords: [Chord]
     me: Me
   }
 
