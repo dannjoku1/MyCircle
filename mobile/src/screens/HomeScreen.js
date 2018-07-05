@@ -4,18 +4,25 @@ import styled from 'styled-components/native';
 import FeedCard from '../components/FeedCard/FeedCard'
 
  const Root = styled.View`
-  backgroundColor: white;
+  backgroundColor: #F2F2F2;
   flex: 1;
-  justifyContent: center;
-  
+  paddingTop: 5;
  `;
+ 
+ const List = styled.ScrollView``
 
 class HomeScreen extends Component {
   state = { }
     render() {
       return (
         <Root> 
-          <FeedCard /> 
+          <List>
+            <FeedCard /> 
+            <FeedCard /> 
+            <FeedCard /> 
+            <FeedCard /> 
+            <FeedCard /> 
+          </List>
         </Root>
       );
     } 

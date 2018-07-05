@@ -6,24 +6,40 @@ import FeedCardButton from './FeedCardButton'
 
 const Root = styled.View`
   minHeight: 180;
-  backgroundColor: red;
+  backgroundColor: ${props => props.theme.WHITE}
   width: 100%;
+  padding: 6px;
   shadowColor: ${props => props.theme.SECONDARY};
   shadowOffset: 0px 2px; 
   shadowRadius: 2;
   shadowOpacity: 0.2;
+  marginVertical: 5;
 `;
 
 const CardContentContainer = styled.View`
   flex: 1;
-  backgroundColor: blue;
+  padding: 10px 20px 10px 0px;
 `;
+
+const CardContentText = styled.Text`
+  fontSize:  14;
+  textAlign: left;
+  paddingLeft: 6;
+  fontWeight: 500;
+  color: ${props => props.theme.SECONDARY};
+`;
+
+const text = "Dan's first Chord!!!"
 
 function FeedCard() { 
   return (
     <Root>
       <FeedCardHeader />
-      <CardContentContainer />
+        <CardContentContainer>
+          <CardContentText>
+            {text}
+          </CardContentText>
+        </CardContentContainer>
       <FeedCardButton />
     </Root> 
   )
