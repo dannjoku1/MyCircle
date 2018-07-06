@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import FeedCard from '../components/FeedCard/FeedCard'
 
  const Root = styled.View`
-  backgroundColor: #F2F2F2;
   flex: 1;
   paddingTop: 5;
  `;
@@ -17,6 +16,11 @@ class HomeScreen extends Component {
       return (
         <Root> 
           <List>
+            <FeedCard />    
+            <FeedCard /> 
+            <FeedCard /> 
+            <FeedCard /> 
+            <FeedCard /> 
             <FeedCard /> 
             <FeedCard /> 
             <FeedCard /> 
