@@ -10,13 +10,13 @@ const Root = styled.View`
   position: relative;  
 `;
 
-const ButtonLoginText = styled.Text`
+const ButtonSignupText = styled.Text`
   color: ${props => props.theme.WHITE};
   fontWeight: bold;
   fontSize: 20;  
 `;
 
-const ButtonLogin = styled(Touchable).attrs({
+const ButtonSignup = styled(Touchable).attrs({
   feedback: 'opacity'
 })`
   height: 75;
@@ -40,14 +40,14 @@ const ButtonLogin = styled(Touchable).attrs({
     alignItems: center;
   `;
 
-  const Button = styled(Touchable).attrs({
+  const ButtonLogin = styled(Touchable).attrs({
     feedback: 'opacity',
   })`
     justifyContent: center;
     alignItems: center;
   `;
 
-  const ButtonText = styled.Text`
+  const ButtonLoginText = styled.Text`
   color: ${props => props.theme.WHITE};
   fontWeight: 400;
   fontSize: 15;  
@@ -59,6 +59,9 @@ class AuthenticationScreen extends Component {
   state = { 
     showSignup: false
   }
+
+  _onShowSignupPress = () => this.setState({ showSignup: true });
+
   render() {
     if (this.state.showSignup) {
       return (
@@ -69,17 +72,17 @@ class AuthenticationScreen extends Component {
     }
     return (
       <Root>
-        <ButtonLogin>
-          <ButtonLoginText>
+        <ButtonSignup onPress={this._onShowSignupPress}>
+          <ButtonSignupText>
             Sign Up
-          </ButtonLoginText>
-        </ButtonLogin>
+          </ButtonSignupText>
+        </ButtonSignup>
         <BottomTextContainer>
-          <Button>
-            <ButtonText>
+          <ButtonLogin>
+            <ButtonLoginText>
               Already have an account?
-            </ButtonText>
-          </Button>
+            </ButtonLoginText>
+          </ButtonLogin>
         </BottomTextContainer>
       </Root>
     );
