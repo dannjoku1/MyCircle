@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable'
 
+import SignupForm from '../components/SignupForm'
+
 const Root = styled.View`
   flex: 1;
   backgroundColor: ${props => props.theme.SECONDARY};
@@ -54,8 +56,17 @@ const ButtonLogin = styled(Touchable).attrs({
 
 
 class AuthenticationScreen extends Component {
-  state = { }
+  state = { 
+    showSignup: false
+  }
   render() {
+    if (this.state.showSignup) {
+      return (
+        <Root>
+          <SignupForm />
+        </Root>
+      )
+    }
     return (
       <Root>
         <ButtonLogin>
