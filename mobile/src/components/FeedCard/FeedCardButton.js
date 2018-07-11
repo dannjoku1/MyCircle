@@ -22,7 +22,6 @@ const Button = styled(Touchable).attrs({
   paddingHorizontal: 32px;
 `;
 
-const likeCount = 3;
 const isLiked = false ;
 
 const ButtonText = styled.Text`
@@ -32,7 +31,7 @@ const ButtonText = styled.Text`
 
 `;
 
-function FeedCardButton() { 
+function FeedCardButton({ likeCount }) { 
   return (
     <Root>
       <Button>

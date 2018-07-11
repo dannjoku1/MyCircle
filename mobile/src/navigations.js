@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
 
@@ -12,6 +12,7 @@ import ProfileScreen from './screens/ProfileScreen';
 //import NewTweetScreen from './screens/NewTweetScreen';
 
 import { colors } from './utils/constants' 
+import NewChordScreen from './screens/NewChordScreen';
 
 
 const TAB_ICON_SIZE = 20;
@@ -32,6 +33,14 @@ const Tabs = TabNavigator(
         headerTitle: 'Explore',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="search" />,
+      }),
+    },
+    NewChord: {
+      screen: NewChordScreen,
+      navigationOptions: () => ({
+        headerTitle: 'Create Chord',
+        tabBarIcon: ({ tintColor }) =>
+          <Feather size={TAB_ICON_SIZE} color={tintColor} name="plus-circle" />,
       }),
     },
     Notifications: {

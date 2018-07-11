@@ -10,7 +10,7 @@ const ChordSchema = new Schema({ // sets up basic connection for Mongodb
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  favoriteCount: {
+  likeCount: {
     type: Number,
     default: 0,
   },

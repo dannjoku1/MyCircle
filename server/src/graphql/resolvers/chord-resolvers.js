@@ -13,7 +13,7 @@ export default { // function that returns users data
   }, 
   getChords: async (_, args, { user }) => { 
     try {
-      await requireAuth(user)
+ //     await requireAuth(user)
       return Chord.find({}).sort({ createdAt: -1 }) // finds everything coming in from the connection Chord
     } catch (error) {
       throw error;

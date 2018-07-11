@@ -31,16 +31,16 @@ const CardContentText = styled.Text`
 
 const text = "Dan's first Chord!!!"
 
-function FeedCard() { 
+function FeedCard({ text, user, createdAt, likeCount }) { // now returns real data 
   return (
     <Root>
-      <FeedCardHeader />
+      <FeedCardHeader { ...user } createdAt={createdAt}/> 
         <CardContentContainer>
           <CardContentText>
             {text}
           </CardContentText>
         </CardContentContainer>
-      <FeedCardButton />
+      <FeedCardButton likeCount={likeCount}/>
     </Root> 
   )
 }

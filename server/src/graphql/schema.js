@@ -35,7 +35,7 @@ export default`
     _id: ID
     text: String!
     user: User!
-    favoriteCount: Int!
+    likeCount: Int!
     createdAt: Date!
     updatedAt: Date!
   }
