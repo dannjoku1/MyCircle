@@ -30,14 +30,14 @@ const ButtonSignup = styled(Touchable).attrs({
   borderRadius: 20;
   `;
 
-  const BottomTextContainer = styled.View`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; 
-    height: 200;
-    justifyContent: center;
-    alignItems: center;
+const BottomTextContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  height: 200;
+  justifyContent: center;
+  alignItems: center;
   `;
 
   const ButtonLogin = styled(Touchable).attrs({
@@ -69,7 +69,7 @@ class AuthenticationScreen extends Component {
     if (this.state.showSignup) {
       return (
         <Root>
-          <SignupForm _onBackPress={this._onBackPress} />
+          <SignupForm onBackPress={this._onBackPress} />
         </Root>
       )
     }
