@@ -53,20 +53,23 @@ const ButtonSignup = styled(Touchable).attrs({
   fontSize: 15;  
 `;
 
-
+const initialState = { 
+  showSignup: false,
+  showLogin: false,
+}
 
 class AuthenticationScreen extends Component {
-  state = { 
-    showSignup: false
-  }
+  state = initialState;
 
   _onShowSignupPress = () => this.setState({ showSignup: true });
+  
+  _onBackPress = () => this.setState({ ...initialState });
 
   render() {
     if (this.state.showSignup) {
       return (
         <Root>
-          <SignupForm />
+          <SignupForm _onBackPress={this._onBackPress} />
         </Root>
       )
     }
