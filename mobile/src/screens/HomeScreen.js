@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { graphql } from 'react-apollo';
+import { graphql, compose, withApollo } from 'react-apollo';
 import { ActivityIndicator, FlatList } from 'react-native'
+import { connect } from 'react-redux'
 
+import { getUserInfo } from '../actions/user'
 
 import FeedCard from '../components/FeedCard/FeedCard'
 
 import GET_CHORDS_QUERY from '../graphql/queries/getChords';
+import ME_QUERY from '../graphql/queries/me'
 
 
 const Root = styled.View`
@@ -39,4 +42,7 @@ class HomeScreen extends Component {
       );
     } 
 }
-export default graphql(GET_CHORDS_QUERY)(HomeScreen);
+export default withApollo(compose(
+  connect(undifined, { getUserInfo }),
+  graphql(GET_CHORDS_QUERY) 
+)(HomeScreen));
