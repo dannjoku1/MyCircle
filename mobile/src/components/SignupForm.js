@@ -3,8 +3,13 @@ import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Platform, Keyboard, AsyncStorage } from 'react-native';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import { colors, fakeAvatar } from '../utils/constants';
+import SIGNUP_MUTATION from '../graphql/mutations/signup'
+import Loading from './Loading';
+import { login } from '../actions/user'
 
 const Root = styled(Touchable).attrs({
   feedback: 'none',
@@ -76,7 +81,8 @@ class SignupForm extends Component {
     fullName: '',
     email: '',
     password: '',
-    username: '',
+    userName: '',
+    loading: '',
   };
 
   _onOutsidePress = () => Keyboard.dismiss();
@@ -84,15 +90,46 @@ class SignupForm extends Component {
   _onChangeText = (text, type) => this.setState({ [type]: text });
 
   _checkIfDisabled() {
-    const { fullName, email, password, username } = this.state;
+    const { fullName, email, password, userName } = this.state;
 
-    if (!fullName || !email || !password || !username) {
+    if (!fullName || !email || !password || !userName) {
       return true;
     }
     return false;
   }
 
+  _onSignupPress = async () => {
+    this.setState({ loading: true });
+    const { fullName, email, password, userName } = this.state; // pull user info from state 
+    const avatar = fakeAvatar; // import fake avatar ... might remove later 
+
+
+
+    try {    
+      const { data } = await this.props.mutate({
+        variables: {
+          fullName,
+          email,
+          password,
+          userName,
+          avatar,
+        }
+      }); 
+      await AsyncStorage.setItem('@mycircle', data.signup.token);
+      this.setState({ loading: false });
+      return this.props.login();
+    } catch (error) {
+      throw error;
+    }
+
+
+ 
+  }
+
   render() {
+    if (this.state.loading) {
+      return <Loading />;
+    }
     return (
       <Root onPress={this._onOutsidePress}>
         <BackButton onPress={this.props.onBackPress}>
@@ -125,11 +162,11 @@ class SignupForm extends Component {
             <Input 
               placeholder="Username" 
               autoCapitalize="none" 
-              onChangeText={text => this._onChangeText(text, 'username')}
+              onChangeText={text => this._onChangeText(text, 'userName')}
             />
           </InputWrapper>
         </Wrapper>
-        <ButtonConfirm disabled={this._checkIfDisabled()}>
+        <ButtonConfirm onPress={this._onSignupPress} disabled={this._checkIfDisabled()}>
           <ButtonConfirmText>
             Sign Up
           </ButtonConfirmText>
@@ -139,5 +176,9 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm
+export default compose(
+  graphql(SIGNUP_MUTATION),
+  connect(undefined, { login }),
+)(SignupForm); 
 
+ 
