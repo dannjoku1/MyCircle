@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 export function login() { 
   return {
     type: 'LOGIN'
@@ -12,7 +14,15 @@ export function getUserInfo(info) {
 }
 
 export function logout() {
-  return {
-    type: 'LOGOUT'
+  return async (dispatch) => {
+    try {
+      await AsyncStorage.removeItem('@mycircle');
+
+      return dispatch({
+        type: 'LOGOUT'
+      })
+    } catch (error) {
+      throw error;
+    }
   }
 }

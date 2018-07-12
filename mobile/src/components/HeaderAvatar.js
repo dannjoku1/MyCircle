@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 import { connect } from 'react-redux';
 import { connectActionSheet  } from '@expo/react-native-action-sheet';
+import { withApollo } from 'react-apollo';
 
 import Loading from './Loading';
 import { logout } from '../actions/user';
@@ -35,6 +36,7 @@ class HeaderAvatar extends Component {
         destructiveButtonIndex
       }, buttonIndex => {
         if (buttonIndex === 0) {
+          this.props.client.resetStore();
           return this.props.logout();
         }
       },
@@ -58,4 +60,4 @@ class HeaderAvatar extends Component {
   }
 }
 
-export default connect(state => ({ info: state.user.info }), { logout })(connectActionSheet(HeaderAvatar)); 
+export default withApollo(connect(state => ({ info: state.user.info }), { logout })(connectActionSheet(HeaderAvatar))); 
