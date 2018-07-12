@@ -11,6 +11,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 //import NewTweetScreen from './screens/NewTweetScreen';
 
+import HeaderAvatar from './components/HeaderAvatar'
+
 import { colors } from './utils/constants' 
 import NewChordScreen from './screens/NewChordScreen';
 
@@ -81,8 +83,11 @@ const Tabs = TabNavigator(
 // takes object where we pass the home screen
 const AppMainNav = StackNavigator({
   Home: {
-    screen: Tabs
-  }
+    screen: Tabs,
+    navigationOptions: () => ({
+      headerLeft: <HeaderAvatar />
+    })
+  },
 }, {
   cardStyle: {
     backgroundColor: '#F1F6FA',
