@@ -20,6 +20,15 @@ const Root = styled.View`
 const List = styled.ScrollView``
 
 class HomeScreen extends Component {
+  componentDidMount() {
+    this._getUserInfo();
+  }
+
+  _getUserInfo = async () => {
+    const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
+    this.props.getUserInfo(me);
+  };
+
   _renderItem = ({ item }) => <FeedCard {...item} />
     render() {
       const { data } = this.props;
@@ -43,6 +52,6 @@ class HomeScreen extends Component {
     } 
 }
 export default withApollo(compose(
-  connect(undifined, { getUserInfo }),
+  connect(undefined, { getUserInfo }),
   graphql(GET_CHORDS_QUERY) 
 )(HomeScreen));
