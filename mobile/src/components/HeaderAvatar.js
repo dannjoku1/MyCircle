@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import Touchable from '@appandflow/touchable';
+//import Touchable from '@appandflow/touchable';
 import { connect } from 'react-redux';
 import { connectActionSheet  } from '@expo/react-native-action-sheet';
 import { withApollo } from 'react-apollo';
 
 import Loading from './Loading';
+import ButtonHeader from './ButtonHeader'
 import { logout } from '../actions/user';
 //import { fakeAvatar } from '../utils/constants';
 
@@ -18,13 +19,16 @@ const Avatar = styled.Image`
   borderRadius: ${AVATAR_RADIUS};
 `;
 
-const Button = styled(Touchable).attrs({
-  feedback: 'opacity'
-})`
-  marginLeft: 15;
-  justifyContent: center;
-  alignItems: center; 
-`;
+/*
+  const Button = styled(Touchable).attrs({
+    feedback: 'opacity'
+  })`
+    marginRight: ${props => props.side === 'right' ? 15 : 0};
+    marginLeft: ${props => props.side === 'left' ? 15 : 10};
+    justifyContent: center;
+    alignItems: center; 
+  `;
+*/
 
 class HeaderAvatar extends Component {
   _onOpenActionSheet = () => {
@@ -47,15 +51,15 @@ class HeaderAvatar extends Component {
     const info = false;
     if (!this.props.info) {
       return (
-        <Button disabled>
+        <ButtonHeader side="left" disabled>
           <Loading size="small"/>
-        </Button>
+        </ButtonHeader>
       );
     }
     return (
-      <Button onPress={this._onOpenActionSheet}>
+      <ButtonHeader side="left" onPress={this._onOpenActionSheet}>
         <Avatar source={{ uri: this.props.info.avatar}} />
-      </Button>
+      </ButtonHeader>
     );
   }
 }

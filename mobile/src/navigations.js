@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
-import { FontAwesome, Feather } from '@expo/vector-icons';
+import { FontAwesome, Feather, SimpleLineIcons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
-
 import ExploreScreen from './screens/ExploreScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
-//import NewTweetScreen from './screens/NewTweetScreen';
+import NewChordScreen from './screens/NewChordScreen';
 
+import ButtonHeader from './components/ButtonHeader'
 import HeaderAvatar from './components/HeaderAvatar'
 
 import { colors } from './utils/constants' 
-import NewChordScreen from './screens/NewChordScreen';
 
 
 const TAB_ICON_SIZE = 20;
@@ -37,14 +36,14 @@ const Tabs = TabNavigator(
           <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="search" />,
       }),
     },
-    NewChord: {
+  /*  NewChord: {
       screen: NewChordScreen,
       navigationOptions: () => ({
         headerTitle: 'Create Chord',
         tabBarIcon: ({ tintColor }) =>
           <Feather size={TAB_ICON_SIZE} color={tintColor} name="plus-circle" />,
       }),
-    },
+    }, */
     Notifications: {
       screen: NotificationsScreen,
       navigationOptions: () => ({
@@ -80,15 +79,35 @@ const Tabs = TabNavigator(
   },
 );
 
+const NewChordModel = StackNavigator(
+  {
+    NewChord: {
+      screen: NewChordScreen,
+    }
+  },
+  {
+    headerMode: 'none'
+  }
+)
+
 // takes object where we pass the home screen
 const AppMainNav = StackNavigator({
   Home: {
     screen: Tabs,
-    navigationOptions: () => ({
-      headerLeft: <HeaderAvatar />
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <HeaderAvatar />,
+      headerRight: (
+        <ButtonHeader side="right" onPress={() => navigation.navigate('NewChord')}>
+          <Feather color={colors.PRIMARY} size={20} name="plus-circle" />
+        </ButtonHeader>
+      )
     })
   },
-}, {
+  NewChord: {
+    screen: NewChordModel
+  }
+}, 
+{
   cardStyle: {
     backgroundColor: '#F1F6FA',
  },
