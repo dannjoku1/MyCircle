@@ -1,5 +1,9 @@
 import Chord from '../../models/Chord';
 import { requireAuth } from '../../services/auth';
+import { pubsub } from '../../config/pubsub'
+
+const CHORD_ADDED = 'tweetAdded';
+//export const TWEET_FAVORITED = 'tweetFavorited';
 
 export default { // function that returns users data 
 
@@ -30,7 +34,12 @@ export default { // function that returns users data
   createChord: async (_, args, { user }) => {
     try {
       await requireAuth(user)
-      return Chord.create({ ...args, user: user._id}) // if ... spread not included, we will have an arguement inside an arguement
+      // if ... spread not included, we will have an arguement inside an arguement
+      const chord = await Chord.create({ ...args, user: user._id });
+
+      pubsub.publish(CHORD_ADDED, { [CHORD_ADDED]: chord });
+
+      return chord;
     } catch (error) {
       throw error; 
     }
@@ -71,5 +80,8 @@ export default { // function that returns users data
     } catch (error) {
       throw error;
     }
+  },
+  chordAdded: {
+    subscribe: () => pubsub.asyncIterator(CHORD_ADDED)
   }
 }

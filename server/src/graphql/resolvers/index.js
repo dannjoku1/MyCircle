@@ -21,5 +21,9 @@ export default {
     deleteChord: ChordResolvers.deleteChord,
     signup: UserResolvers.signup,
     login: UserResolvers.login, 
+  },
+  Subscription: {
+    chordAdded: ChordResolvers.chordAdded,
+    
   }
 }

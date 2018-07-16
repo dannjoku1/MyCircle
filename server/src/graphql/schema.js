@@ -55,6 +55,11 @@ export default`
     login(email: String!, password: String!): Auth
   }
 
+  type Subscription { 
+    chordAdded: Chord
+  
+  }
+
   schema {
     query: Query
     mutation: Mutation
