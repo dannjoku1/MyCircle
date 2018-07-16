@@ -33,15 +33,32 @@ const Input = styled.TextInput.attrs({
   color: ${props => props.theme.SECONDARY};
 `;
 
+const ChordButton = styled(Touchable).attrs({
+  feedback: 'opacity',
+})`
+  backgroundColor: ${props => props.theme.PRIMARY};
+  justifyContent: center;
+  alignItems: center;
+  width: 80;
+  height: 40;
+  borderRadius: 20;
+  position: absolute;
+  top: 60%;
+  right: 0;
+`;
+
 const T = styled.Text``
 
 class NewChordScreen extends Component {
-  state = {  }
+  state = { text: ''};
+
+  _onChangeText = text => this.setState({ text });
+
   render() {
     return (
       <Root>
         <Wrapper>
-          <Input />
+          <Input value={this.state.text} onChange={this._onChangeText} />
         </Wrapper>
       </Root>
     );
