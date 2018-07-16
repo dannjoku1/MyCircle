@@ -47,6 +47,19 @@ const ChordButton = styled(Touchable).attrs({
   right: 0;
 `;
 
+const ChordButtonText = styled.Text`
+  color: ${props => props.theme.WHITE};
+  fontSize: 16;
+`;
+
+const TextLength = styled.Text`
+  fontSize: 18;
+  color: ${props => props.theme.PRIMARY};
+  position: absolute;
+  top: 45%;
+  right: 5%;
+`;
+
 const T = styled.Text``
 
 class NewChordScreen extends Component {
@@ -54,11 +67,22 @@ class NewChordScreen extends Component {
 
   _onChangeText = text => this.setState({ text });
 
+  get _textLength() {
+    return 140 - this.state.text.length;
+  }
+
+
   render() {
     return (
       <Root>
         <Wrapper>
-          <Input value={this.state.text} onChange={this._onChangeText} />
+          <Input value={this.state.text} onChangeText={this._onChangeText} />
+          <TextLength>
+            {this._textLength}
+          </TextLength>
+          <ChordButton onPress={this._onCreateChordPress} disabled={this._buttonDisabled}>
+            <ChordButtonText>Chord</ChordButtonText>
+          </ChordButton>
         </Wrapper>
       </Root>
     );
