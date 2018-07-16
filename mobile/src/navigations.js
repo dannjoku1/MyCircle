@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
-import { FontAwesome, Feather, SimpleLineIcons } from '@expo/vector-icons';
+import { Keyboard } from 'react-native';
+import { FontAwesome, Feather, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
 import ExploreScreen from './screens/ExploreScreen';
@@ -83,6 +84,20 @@ const NewChordModel = StackNavigator(
   {
     NewChord: {
       screen: NewChordScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <HeaderAvatar />,
+        headerRight: (
+          <ButtonHeader 
+            side="right" 
+            onPress={() => {
+            Keyboard.dismiss();
+            navigation.goBack(null);
+            }}
+          >
+            <EvilIcons color={colors.PRIMARY} size={25} name="close" />
+          </ButtonHeader>
+        )
+      })
     }
   },
   {
