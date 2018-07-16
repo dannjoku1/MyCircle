@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 
-const Root = styled.View``;
+const Root = styled.View`
+  backgroundColor: ${props => props.theme.WHITE};
+  flex: 1;
+  alignItems: center;
+`;
 
 const T = styled.Text``
 
