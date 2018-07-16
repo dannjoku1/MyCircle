@@ -6,6 +6,8 @@ import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import { colors } from '../utils/constants';
+import CREATE_CHORD_MUTATION from '../graphql/mutations/createChord';
+import GET_CHORDS_QUERY from '../graphql/queries/getChords';
 
 const Root = styled.View`
   backgroundColor: ${props => props.theme.WHITE};
@@ -67,10 +69,49 @@ class NewChordScreen extends Component {
 
   _onChangeText = text => this.setState({ text });
 
+  _onCreateChordPress = async () => {
+    const { user } = this.props;
+
+    await this.props.mutate({
+      variables: {
+        text: this.state.text
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createChord: {
+          __typename: 'Chord',
+          text: this.state.text,
+          likeCount: 0,
+          _id: Math.round(Math.random() * -1000000),
+          createdAt: new Date(),
+          user: {
+            __typename: 'User',
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: user.avatar   
+          }
+        },
+      },        
+        update: (store, { data: { createChord } }) => {
+          const data = store.readQuery({ query: GET_CHORDS_QUERY });
+          if (!data.getChords.find(t => t._id === createChord._id)) {
+            store.writeQuery({ query: GET_CHORDS_QUERY, data: { getChords: [{ ...createChord }, ...data.getChords] } });
+          }
+      }
+    });
+
+  Keyboard.dismiss();
+    this.props.navigation.goBack(null);   
+  }
+ 
   get _textLength() {
     return 140 - this.state.text.length;
   }
 
+  get _buttonDisabled() {
+    return this.state.text.length < 5;
+  }
 
   render() {
     return (
@@ -89,4 +130,7 @@ class NewChordScreen extends Component {
   }
 }
 
-export default NewChordScreen;
+export default compose(
+  graphql(CREATE_CHORD_MUTATION),
+  connect(state => ({ user: state.user.info }))
+)(NewChordScreen);
