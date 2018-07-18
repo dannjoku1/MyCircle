@@ -2,7 +2,7 @@ import Chord from '../../models/Chord';
 import { requireAuth } from '../../services/auth';
 import { pubsub } from '../../config/pubsub'
 
-const CHORD_ADDED = 'tweetAdded';
+const CHORD_ADDED = 'chordAdded';
 //export const TWEET_FAVORITED = 'tweetFavorited';
 
 export default { // function that returns users data 

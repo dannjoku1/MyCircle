@@ -10,7 +10,7 @@ import CREATE_CHORD_MUTATION from '../graphql/mutations/createChord';
 import GET_CHORDS_QUERY from '../graphql/queries/getChords';
 
 const Root = styled.View`
-  backgroundColor: ${props => props.theme.WHITE};
+  backgroundColor: ${props => props.theme.NIGHTMODEMAIN};
   flex: 1;
   alignItems: center;
 `;

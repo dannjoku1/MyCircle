@@ -6,7 +6,7 @@ import FeedCardButton from './FeedCardButton'
 
 const Root = styled.View`
   minHeight: 180;
-  backgroundColor: ${props => props.theme.WHITE}
+  backgroundColor: ${props => props.theme.NIGHTMODEMAIN}
   width: 100%;
   padding: 6px;
   shadowColor: ${props => props.theme.SECONDARY};
@@ -26,7 +26,7 @@ const CardContentText = styled.Text`
   textAlign: left;
   paddingLeft: 6;
   fontWeight: 500;
-  color: ${props => props.theme.SECONDARY};
+  color: ${props => props.theme.WHITE};
 `;
 
 const text = "Dan's first Chord!!!"

@@ -1,6 +1,8 @@
 export const colors = {
   PRIMARY: '#55ACEE',
   SECONDARY: '#444B52',
+  NIGHTMODEBACKGROUND: '#141d26',
+  NIGHTMODEMAIN: '#19283a',
   WHITE: '#FFFFFF',
   LIGHT_GRAY: '#CAD0D6',
 };

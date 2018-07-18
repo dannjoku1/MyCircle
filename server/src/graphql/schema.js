@@ -57,7 +57,6 @@ export default`
 
   type Subscription { 
     chordAdded: Chord
-  
   }
 
   schema {

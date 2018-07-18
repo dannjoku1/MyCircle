@@ -13,17 +13,16 @@ export default {
     getChord: ChordResolvers.getChord,
     getChords: ChordResolvers.getChords,
     getUserChords: ChordResolvers.getUserChords,
-    me: UserResolvers.me,
+    me: UserResolvers.me
   }, 
   Mutation: {
     createChord: ChordResolvers.createChord,
     updateChord: ChordResolvers.updateChord,
     deleteChord: ChordResolvers.deleteChord,
     signup: UserResolvers.signup,
-    login: UserResolvers.login, 
+    login: UserResolvers.login 
   },
   Subscription: {
-    chordAdded: ChordResolvers.chordAdded,
-    
+    chordAdded: ChordResolvers.chordAdded
   }
 }

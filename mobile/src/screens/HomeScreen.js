@@ -9,7 +9,8 @@ import { getUserInfo } from '../actions/user'
 import FeedCard from '../components/FeedCard/FeedCard'
 
 import GET_CHORDS_QUERY from '../graphql/queries/getChords';
-import ME_QUERY from '../graphql/queries/me'
+import ME_QUERY from '../graphql/queries/me';
+import CHORD_ADDED_SUBSCRIPTION from '../graphql/subscriptions/chordAdded';
 
 
 const Root = styled.View`
@@ -20,6 +21,27 @@ const Root = styled.View`
 const List = styled.ScrollView``
 
 class HomeScreen extends Component {
+  componentWillMount() {
+    this.props.data.subscribeToMore({
+      document: CHORD_ADDED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const newChord = subscriptionData.data.chordAdded;
+
+        if (!prev.getChords.find(t => t._id === newChord._id)) {
+          return {
+            ...prev,
+            getChords: [{ ...newChord }, ...prev.getChords]
+          };
+        }
+        return prev;
+      }
+    })
+  }
+
   componentDidMount() {
     this._getUserInfo();
   }
@@ -30,6 +52,7 @@ class HomeScreen extends Component {
   };
 
   _renderItem = ({ item }) => <FeedCard {...item} />
+
     render() {
       const { data } = this.props;
       if (data.loading) {

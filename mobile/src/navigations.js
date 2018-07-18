@@ -72,7 +72,7 @@ const Tabs = TabNavigator(
       activeTintColor: colors.PRIMARY,
       inactiveTintColor: colors.LIGHT_GRAY,
       style: {
-        backgroundColor: colors.WHITE,
+        backgroundColor: colors.NIGHTMODEBACKGROUND,
         height: 50,
         paddingVertical: 5,
       },
@@ -124,11 +124,11 @@ const AppMainNav = StackNavigator({
 }, 
 {
   cardStyle: {
-    backgroundColor: '#F1F6FA',
+    backgroundColor: colors.NIGHTMODEBACKGROUND,
  },
    navigationOptions: () => ({
      headerStyle: {
-       backgroundColor: colors.WHITE,
+       backgroundColor: colors.NIGHTMODEBACKGROUND,
      },
      headerTitleStyle: {
        fontWeight: 'bold',

@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger'
-import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
 import reducers from './reducers';
 
@@ -19,7 +19,7 @@ const wsClient = new SubscriptionClient('ws://localhost:3000/subscriptions', {
 })
 
  networkInterface.use([{
-  async applyMiddleware(req, next) {
+  async applyMiddleware(req, next) { 
     if (!req.options.headers) {
       req.options.headers = {};
     }

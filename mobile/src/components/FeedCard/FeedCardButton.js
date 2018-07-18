@@ -27,7 +27,7 @@ const isLiked = false ;
 const ButtonText = styled.Text`
   fontSize: 14;
   fontWeight: 500;
-  color: ${props => props.theme.LIGHT_GRAY};
+  color: ${props => props.theme.SECONDARY};
 
 `;
 
@@ -35,19 +35,19 @@ function FeedCardButton({ likeCount }) {
   return (
     <Root>
       <Button>
-        <SimpleLineIcons name="bubble" color={colors.LIGHT_GRAY} size={ICON_SIZE} />
+        <SimpleLineIcons name="bubble" color={colors.SECONDARY} size={ICON_SIZE} />
         <ButtonText>
           {likeCount}
         </ButtonText>
       </Button>
       <Button>
-      <Entypo name="ccw" color={colors.LIGHT_GRAY} size={ICON_SIZE} />
+      <Entypo name="ccw" color={colors.SECONDARY} size={ICON_SIZE} />
         <ButtonText>
           {likeCount}
         </ButtonText>
       </Button>
       <Button>
-        <EvilIcons name="like" color={isLiked ? 'blue' : colors.LIGHT_GRAY} size={ICON_SIZE} />
+        <EvilIcons name="like" color={isLiked ? 'blue' : colors.SECONDARY} size={ICON_SIZE} />
         <ButtonText>
           {likeCount}
         </ButtonText>
