@@ -36,6 +36,7 @@ export default`
     text: String!
     user: User!
     likeCount: Int!
+    isLiked: Boolean!
     createdAt: Date!
     updatedAt: Date!
   }
