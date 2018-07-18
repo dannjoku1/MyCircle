@@ -32,7 +32,7 @@ const Input = styled.TextInput.attrs({
   height: 40%;
   width: 100%;
   fontSize: 18;
-  color: ${props => props.theme.SECONDARY};
+  color: ${props => props.theme.WHITE};
 `;
 
 const ChordButton = styled(Touchable).attrs({

@@ -49,7 +49,7 @@ const MetaBottomContainer = styled.View`
 const MetaText = styled.Text`
   fontSize: 14;
   fontWeight: 600;
-  color: ${props => props.theme.SECONDARY};
+  color: ${props => props.theme.WHITE};
 `;
 
 const MetaFullName = styled.Text`
